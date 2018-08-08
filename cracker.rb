@@ -1,5 +1,6 @@
 require_relative './padlock.rb'
 require_relative './brute_force_strategy.rb'
+require_relative './start_middle_strategy.rb'
 
 class Cracker
   def initialize(crack_strategy = BruteForceStrategy.new)
