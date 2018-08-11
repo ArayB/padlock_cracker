@@ -1,7 +1,6 @@
 class Padlock
-  DEFAULT_DIGITS = 4
-  def initialize(digits = nil)
-    @digits = digits || DEFAULT_DIGITS
+  def initialize(lock_strategy = RandomLockStrategy)
+    @lock_strategy = lock_strategy
     @lock_code = set_lock_code
     lock
   end
@@ -17,8 +16,8 @@ class Padlock
     correct
   end
 
-  def lock(strategy = RandomLockStrategy)
-    @display_code = strategy.random_code(@lock_code)
+  def lock
+    @display_code = @lock_strategy.display_code(@lock_code)
     @locked = true
   end
 
@@ -29,12 +28,6 @@ class Padlock
   end
 
   def random_code
-    Array.new(@digits) { rand(10) }
-  end
-
-  class RandomLockStrategy
-    def self.random_code(lock_code)
-      Array.new(lock_code.length) { rand(10) }
-    end
+    Array.new(4) { rand(10) }
   end
 end

@@ -11,7 +11,7 @@ end
 
 bar = TTY::ProgressBar.new("StartMiddleStrategy [:bar]", total: 1000)
 1000.times do
-  cr = Cracker.new(StartMiddleStrategy.new)
+  cr = Cracker.new(StartMiddleStrategy.new, RandomLockStrategy)
   cr.run
   bar.advance(1)
 end
