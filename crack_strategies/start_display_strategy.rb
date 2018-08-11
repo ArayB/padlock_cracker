@@ -10,7 +10,6 @@ class StartDisplayStrategy
 
   def run(padlock)
     @padlock = padlock
-
     check_order = create_check_order(padlock.read.join.to_i)
     check_range(check_order)
     result_hash
@@ -19,13 +18,12 @@ class StartDisplayStrategy
   private
 
   def create_check_order(start_point)
-    up = (start_point..9999).to_a
-    down = (0..(start_point-1)).to_a.reverse
+    all_codes = (0..9999).to_a
 
-    longest = up.length > down.length ? up : down
-    shortest = longest == up ? down : up
-
-    longest.zip(shortest).flatten.compact
+    rotated = all_codes.rotate(start_point)
+    up = rotated[0..5000]
+    down = rotated[5001..10000].reverse
+    up.zip(down).flatten.compact
   end
 
   def check_range(range)
