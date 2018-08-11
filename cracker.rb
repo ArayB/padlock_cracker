@@ -16,12 +16,6 @@ class Cracker
 
   def run
     result = @strategy.run(@padlock)
-    puts '*'*40
-    puts '*'*40
-    puts "Unlock code is: #{result[:code]}"
-    puts "Took #{result[:guesses]} guesses"
-    puts '*'*40
-    puts '*'*40
     create_csv
     write_csv(result)
   end

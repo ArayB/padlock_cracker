@@ -3,8 +3,6 @@ class Padlock
   def initialize(digits = nil)
     @digits = digits || DEFAULT_DIGITS
     @lock_code = set_lock_code
-    puts '='*40
-    puts "Lock code generated: #{@lock_code}"
     lock
   end
 
@@ -13,8 +11,6 @@ class Padlock
   end
 
   def unlock(unlock_code)
-    # add a small sleep to put us in more easily comparable time values
-    # sleep 0.001
     @display_code = unlock_code
     correct = unlock_code == @lock_code
     @locked = !correct
