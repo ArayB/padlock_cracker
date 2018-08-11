@@ -3,8 +3,9 @@
 require 'csv'
 
 require_relative './padlock.rb'
-require_relative './brute_force_strategy.rb'
-require_relative './start_middle_strategy.rb'
+require_relative './crack_strategies/brute_force_strategy.rb'
+require_relative './crack_strategies/start_middle_strategy.rb'
+require_relative './crack_strategies/start_display_strategy.rb'
 require_relative './lock_strategies/random_lock_strategy.rb'
 
 class Cracker
