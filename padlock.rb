@@ -1,7 +1,7 @@
 class Padlock
-  def initialize(lock_strategy = RandomLockStrategy)
+  def initialize(lock_strategy = RandomLockStrategy, lock_code = nil)
     @lock_strategy = lock_strategy
-    @lock_code = set_lock_code
+    @lock_code = lock_code || set_lock_code
     lock
   end
 

@@ -6,14 +6,24 @@ require_relative './padlock.rb'
 require_relative './crack_strategies/brute_force_strategy.rb'
 require_relative './crack_strategies/start_middle_strategy.rb'
 require_relative './crack_strategies/start_display_strategy.rb'
+require_relative './crack_strategies/start_opposite_display_strategy.rb'
 require_relative './lock_strategies/random_lock_strategy.rb'
 require_relative './lock_strategies/lazy_lock_strategy.rb'
+require_relative './core_extensions.rb'
 
 class Cracker
-  def initialize(crack_strategy = BruteForceStrategy.new, lock_strategy = RandomLockStrategy)
+  def initialize(crack_strategy = BruteForceStrategy.new,
+                 lock_strategy = RandomLockStrategy,
+                 integer_lock_code = nil)
     @strategy = crack_strategy
     @lock_strategy = lock_strategy
-    @padlock = Padlock.new(lock_strategy)
+    lock_code = if integer_lock_code
+                  integer_lock_code.to_lock_code
+                else
+                  nil
+                end
+
+    @padlock = Padlock.new(lock_strategy, lock_code)
     @initial_code = @padlock.read
     @digits = @initial_code.length
   end
